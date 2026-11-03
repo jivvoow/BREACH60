@@ -1,103 +1,97 @@
 # BREACH 60
 
-60초 안에 가상의 보안 시스템을 돌파하는 해킹 퍼즐 웹게임입니다.
-레트로 터미널 분위기의 타임어택 게임으로, 브라우저에서 바로 플레이할 수 있고 PC와 모바일을 모두 지원합니다.
+**BREACH** — 보안을 뚫고 침입하다.
 
-모든 해킹은 게임 안에서만 동작하는 가상의 퍼즐이며, 실제 시스템과는 어떤 통신도 하지 않습니다.
+60초 안에 암호를 해독하고 보안 시스템을 돌파하는 레트로 터미널 스타일의 해킹 퍼즐 웹게임입니다.
 
-## 주요 기능
+PC와 모바일에서 별도 설치 없이 플레이할 수 있습니다.
 
-- 정확한 60초 카운트다운: 화면 전환과 애니메이션 중에도 멈추지 않습니다
-- 암호 해독, 네트워크 경로 연결, 패턴 해독, 숫자 기억, 최종 추리로 구성된 보안 레이어 (문제는 매번 새로 생성)
-- 100개 노드 전체가 보이는 네트워크 맵과 섹터 확대 보기 (현재 1~20레벨 플레이 가능), 클리어 상황 저장
-- 오답 시 시간 차감, 남은 시간이 점수가 되는 스코어 시스템
-- 해킹 포인트로 시작 전에 사는 도구 (시간 추가, 방패, 힌트)와 레벨별 최고 기록 저장(localStorage)
-- 터미널 타이핑 로그, 시간 경고, 성공/실패 연출
-- 키보드 입력과 모바일 터치 키패드 지원
+## Play Now
 
-## 기술 스택
+**[▶ PLAY BREACH 60](https://jivvoow.github.io/BREACH60/)**
 
-HTML5, CSS3, Vanilla JavaScript (ES Modules), Vite, localStorage.
-런타임 의존성은 없습니다.
+## Preview
+<p align="center">
+  <img src="assets/preview.png" width="500" alt="BREACH 60 Game Preview">
+</p>
 
-## 실행 방법
+
+## Features
+
+- **60-Second Challenge** — 제한 시간 안에 모든 보안 레이어 돌파
+- **Dynamic Puzzles** — 매번 새롭게 생성되는 암호, 경로, 기억력, 패턴 퍼즐
+- **Network Map** — 100개 노드로 구성된 맵, 현재 20개 레벨 플레이 가능
+- **Progressive Difficulty** — 레벨별로 높아지는 난이도
+- **Hack Tools** — 시간 추가, 방패, 힌트 아이템
+- **Retro UI** — 픽셀 아트와 터미널 스타일의 해킹 연출
+- **Local Save** — 진행도와 최고 기록 자동 저장
+- **Multi-Platform** — PC·모바일 및 한국어·영어 지원
+
+## How to Play
+
+1. **NETWORK MAP**에서 도전할 노드를 선택합니다.
+2. **START BREACH**를 누르면 60초 카운트다운이 시작됩니다.
+3. 암호 해독, 네트워크 연결, 숫자 기억, 패턴 분석 등의 퍼즐을 해결합니다.
+4. 모든 보안 레이어를 돌파하면 **ACCESS GRANTED!**
+5. 시간이 0이 되면 **ACCESS DENIED!**
+
+오답을 제출하면 시간이 차감되며, 남은 시간이 많을수록 높은 점수를 획득합니다.
+
+## Tech Stack
+
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES Modules)
+- **Build Tool:** Vite
+- **Storage:** localStorage
+- **Deployment:** GitHub Pages
+- **Testing:** Node.js Test Runner
+
+## Getting Started
 
 Node.js 20 이상이 필요합니다.
 
 ```bash
 npm install
-npm run dev       # 개발 서버
-npm test          # 게임 로직 테스트
-npm run build     # dist/ 에 배포용 빌드 생성
-npm run preview   # 빌드 결과 미리보기
+npm run dev
 ```
 
-## 게임 방법
+기타 명령어:
 
-1. NETWORK MAP에서 노드를 고르고 START BREACH를 누르면 60초 카운트다운이 시작됩니다.
-2. 레이어마다 다른 퍼즐을 풉니다.
-   - **PASSWORD DECRYPTION:** 규칙대로 코드를 입력합니다. 키보드로 입력 후 Enter를 누르거나 모바일 키패드를 탭합니다.
-   - **NETWORK ROUTING:** 노드를 탭하거나 드래그해 주황색 키를 모두 모은 뒤 TARGET까지 연결합니다. 같은 노드는 두 번 지날 수 없습니다.
-   - **MEMORY RECALL:** 잠깐 보인 숫자를 외웁니다. 숫자가 보이는 동안은 입력할 수 없고 타이머도 멈춥니다. `?`로 가려지면 타이머가 다시 흐르고 입력할 수 있습니다. 잊었다면 `다시 보기`로 5초를 내고 숫자를 2초 동안 다시 볼 수 있습니다.
-   - **PATTERN DECODE:** 세 프레임의 변화 규칙을 찾아 `?` 자리에 올 그림을 아래 보기 4개 중에서 고릅니다. 키보드 1~4도 쓸 수 있습니다.
-3. 정답이면 다음 레이어로 넘어갑니다. 오답이면 시간이 차감됩니다.
-4. 모든 레이어를 돌파하면 ACCESS GRANTED와 함께 다음 레벨이 열리고, 시간이 0이 되면 ACCESS DENIED입니다.
-
-레벨이 오를수록 레이어 수가 3개에서 6개로 늘고, 각 퍼즐이 복잡해지며, 오답 페널티가 5초에서 10초까지 커집니다.
-
-| 점수 항목 | 점수 |
-| --- | --- |
-| 퍼즐 하나 해결 | 100 |
-| 미션 성공 보너스 | 200 |
-| 성공 시 남은 시간 1초당 | 10 |
-
-해킹 포인트는 레벨을 성공할 때 얻습니다. 기본 20점에 난이도당 10점, 오답 없이 깨면 10점이 더해지고, 이미 깬 레벨은 4분의 1만 받습니다.
-
-| 도구 | 가격 | 효과 |
-| --- | --- | --- |
-| 시간 +3초 | 20 | 제한 시간 3초 추가 |
-| 방패 | 25 | 첫 오답의 시간 차감을 막음 |
-| 힌트 | 15 | 코드 첫 자리 입력, 경로 절반 연결, 오답 보기 2개 제거 중 하나 |
-
-## 프로젝트 구조
-
+```bash
+npm test        # 테스트
+npm run build   # 배포용 빌드
+npm run preview # 빌드 미리보기
 ```
+
+## Project Structure
+
+```text
 src/
-  config.js            난이도, 점수, 포인트, 타이밍 값
-  tools.js             시작 전 도구 데이터
-  levels.js            레벨 데이터 (전체 100칸 카탈로그)
-  i18n.js              영어/한국어 문구와 언어 전환
-  game/                게임 상태(GameManager), 타이머, 점수 (DOM 없음)
-  puzzles/             퍼즐 생성과 정답 검증 (DOM 없음)
-  ui/                  화면 렌더링, 터미널 로그, 퍼즐별 뷰
-tests/                 node:test 기반 로직 테스트
+├── config.js       # 게임 설정
+├── levels.js       # 레벨 데이터
+├── tools.js        # 아이템 데이터
+├── i18n.js         # 다국어 지원
+├── game/           # 게임 상태, 타이머, 점수
+├── puzzles/        # 퍼즐 생성 및 검증
+└── ui/             # 화면 및 인터랙션
+
+tests/              # 게임 로직 테스트
 ```
 
-## 새 퍼즐 추가하기
+## Roadmap
 
-1. `src/puzzles/`에 `title`, `subtitle`, `generate({ tier, rng })`, `check(puzzle, input)`을 가진 퍼즐을 만들고 `src/puzzles/index.js`에 등록합니다.
-2. `src/ui/`에 `mountPasswordView`와 같은 형태의 뷰를 만들어 `src/ui/render.js`의 `PUZZLE_VIEWS`에 등록합니다.
-3. `src/levels.js`의 레벨 `stages`에 넣습니다.
+- [x] 타이머 및 암호 해독 시스템
+- [x] 네트워크 경로 및 패턴 퍼즐
+- [x] 레벨 시스템과 기록 저장
+- [ ] Log Analysis 퍼즐
+- [ ] Data Extraction 퍼즐
+- [ ] Easy / Hard 난이도 및 사운드
 
-레벨은 `src/levels.js`의 `PLAYABLE_LEVELS`에 항목을 추가하면 맵, 해금, 저장이 자동으로 연결됩니다. 난이도 조절 값은 다음과 같습니다.
+## Deployment
 
-| 값 | 위치 |
-| --- | --- |
-| 퍼즐 종류, 단계 수 | 레벨의 `stages` 배열 |
-| 시간 압박 | 레벨의 `penaltyMs` |
-| 퍼즐 복잡도, 기억 길이 | 각 스테이지의 `tier` (퍼즐 파일의 `TIERS` 표) |
+GitHub Actions를 통해 `main` 브랜치 업데이트 시 자동으로 테스트, 빌드 및 GitHub Pages 배포가 진행됩니다.
 
-최고 기록은 난이도와 레벨별로 따로 저장됩니다.
+---
 
-## 로드맵
+**60 SECONDS. 100 NODES. ONE MISSION.**
 
-- [x] 시작 화면, 타이머, 암호 해독 퍼즐, 성공/실패 화면
-- [x] NETWORK ROUTING, PATTERN DECODE 퍼즐과 5단계 레벨
-- [ ] LOG ANALYSIS 퍼즐
-- [ ] DATA EXTRACTION 퍼즐 (앞선 퍼즐의 단서 활용)
-- [ ] EASY / HARD 난이도, 사운드
-
-## 배포
-
-`.github/workflows/deploy.yml`이 `main` 브랜치 푸시마다 테스트와 빌드를 거쳐 GitHub Pages에 배포합니다.
-저장소의 **Settings > Pages > Source**를 **GitHub Actions**로 설정하세요.
+*Can you breach the system before time runs out?*
