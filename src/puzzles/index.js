@@ -1,3 +1,4 @@
+import { logPuzzle } from './log.js';
 import { memoryPuzzle } from './memory.js';
 import { networkPuzzle } from './network.js';
 import { passwordPuzzle } from './password.js';
@@ -14,4 +15,5 @@ export const PUZZLES = {
   network: networkPuzzle,
   pattern: patternPuzzle,
   memory: memoryPuzzle,
+  log: logPuzzle,
 };

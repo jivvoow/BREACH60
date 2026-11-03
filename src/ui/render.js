@@ -2,6 +2,7 @@ import { applyLanguage, getLanguage, setLanguage, t } from '../i18n.js';
 import { LEVEL_CATALOG, TOTAL_LEVELS } from '../levels.js';
 import { PUZZLES } from '../puzzles/index.js';
 import { replay } from './dom.js';
+import { mountLogView } from './logView.js';
 import { createMapView } from './mapView.js';
 import { mountNetworkView } from './networkView.js';
 import { mountPasswordView } from './passwordView.js';
@@ -13,6 +14,7 @@ const PUZZLE_VIEWS = {
   network: mountNetworkView,
   pattern: mountPatternView,
   memory: mountPasswordView,
+  log: mountLogView,
 };
 
 const RESULT_DELAY_MS = 800;
