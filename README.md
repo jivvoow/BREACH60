@@ -82,7 +82,7 @@ tests/              # 게임 로직 테스트
 - [x] 타이머 및 암호 해독 시스템
 - [x] 네트워크 경로 및 패턴 퍼즐
 - [x] 레벨 시스템과 기록 저장
-- [ ] Log Analysis 퍼즐
+- [x] Log Analysis 퍼즐
 - [ ] Data Extraction 퍼즐
 - [ ] Easy / Hard 난이도 및 사운드
 
