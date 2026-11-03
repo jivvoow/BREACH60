@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0C171B" />
+    <meta name="description" content="BREACH 60: hack a fictional security system in 60 seconds. A time-attack puzzle game for the browser." />
+    <title>BREACH 60</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="crt" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <main class="shell">
+      <!-- START -->
+      <section class="screen screen-start is-active" id="screen-start" data-i18n-label="label.menu" aria-label="Main menu">
+        <div class="frame start-frame">
+          <div class="lang-switch" id="lang-switch" role="group" data-i18n-label="label.language" aria-label="Language">
+            <button class="lang-button" data-lang="en" type="button">ENG</button>
+            <button class="lang-button" data-lang="ko" type="button">KOR</button>
+          </div>
+          <h1 class="logo brackets"><span>BREACH 60</span></h1>
+          <p class="tagline" data-i18n="ui.tagline">Hack the security system in 60 seconds.</p>
+
+          <div class="hero">
+            <span class="dots" aria-hidden="true"></span>
+            <svg class="laptop" viewBox="0 0 200 120" role="img" data-i18n-label="label.laptop" aria-label="Laptop with a locked screen" shape-rendering="crispEdges">
+              <defs>
+                <pattern id="keys" width="8" height="5" patternUnits="userSpaceOnUse">
+                  <rect width="6" height="3" />
+                </pattern>
+              </defs>
+              <path class="lp-line" d="M38 3h124v3h3v84h-130v-84h3z" />
+              <rect class="lp-screen" x="42" y="10" width="116" height="75" />
+              <path class="lp-cursor" d="M47 16h2v2h2v2h-2v2h-2v-2h2v-2h-2zM53 22h6v1h-6z" />
+              <path class="lp-corners" d="M72 25h8v2h-6v6h-2zM128 25v8h-2v-6h-6v-2zM72 70h8v-2h-6v-6h-2zM128 70v-8h-2v6h-6v2z" />
+              <path class="lp-lock" fill-rule="evenodd" d="M94 31h12v3h3v11h3v21h-24v-21h3v-11h3zM96 36v9h8v-9zM98 52v3h1v6h2v-6h1v-3z" />
+              <path class="lp-base" d="M34 92h132l18 18v5h-168v-5z" />
+              <rect class="lp-keys" x="50" y="96" width="102" height="13" fill="url(#keys)" />
+              <rect class="lp-pad" x="86" y="110" width="28" height="3" />
+            </svg>
+            <span class="dots" aria-hidden="true"></span>
+          </div>
+
+          <button class="btn btn-primary btn-start" id="btn-map" type="button">
+            <span class="chev">&gt;</span> <span data-i18n="ui.map">NETWORK MAP</span> <span class="chev">&lt;</span>
+          </button>
+          <div class="start-footer">
+            <button class="btn btn-ghost" id="btn-howto" type="button" data-i18n="ui.howto">HOW TO PLAY</button>
+            <p class="start-best"><span data-i18n="ui.breachedNodes">NODES BREACHED</span> <strong id="start-progress">0 / 100</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- NETWORK MAP -->
+      <section class="screen screen-map" id="screen-map" data-i18n-label="ui.map" aria-label="Network map">
+        <div class="frame map-frame">
+          <header class="topbar">
+            <p class="topbar-title"><span class="prompt">&gt;_</span> BREACH 60 <span class="sep">//</span> <span data-i18n="ui.map">NETWORK MAP</span></p>
+            <p class="map-points"><span data-i18n="ui.points">HACKING POINTS</span> <strong id="map-points">0</strong></p>
+            <button class="map-back" data-action="menu" type="button" data-i18n="ui.menu">MAIN MENU</button>
+          </header>
+          <nav class="sector-tabs" id="sector-tabs" data-i18n-label="label.sectors" aria-label="Sectors"></nav>
+          <div class="map-layout">
+            <div class="map-board" id="map-board" role="group" data-i18n-label="label.levels" aria-label="Select level"></div>
+            <aside class="map-detail" aria-live="polite">
+              <p class="detail-kicker" id="detail-kicker"></p>
+              <h2 class="detail-name" id="detail-name"></h2>
+              <p class="detail-status" id="detail-status"></p>
+              <dl class="detail-stats">
+                <div><dt data-i18n="map.difficulty">DIFFICULTY</dt><dd class="pips" id="detail-difficulty"></dd></div>
+                <div><dt data-i18n="map.steps">LAYERS</dt><dd id="detail-steps"></dd></div>
+                <div><dt data-i18n="map.penalty">MISTAKE COST</dt><dd id="detail-penalty"></dd></div>
+                <div><dt data-i18n="ui.best">BEST SCORE</dt><dd id="detail-best"></dd></div>
+              </dl>
+              <div class="detail-puzzles" id="detail-puzzles"></div>
+              <section class="tools-panel" data-i18n-label="tool.label" aria-label="Pre-run tools">
+                <p class="tools-head">
+                  <span class="tools-label" data-i18n="tool.label">PRE-RUN TOOLS</span>
+                  <span class="tools-balance"><span data-i18n="ui.pointsHeld">YOU HAVE</span> <strong id="tools-balance">0</strong></span>
+                </p>
+                <div class="tools" id="map-tools"></div>
+              </section>
+              <button class="btn btn-primary btn-enter-node" id="btn-enter-node" type="button">
+                <span class="chev">&gt;</span> <span data-i18n="ui.start">START BREACH</span> <span class="chev">&lt;</span>
+              </button>
+              <p class="detail-note" id="detail-note"></p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAME -->
+      <section class="screen screen-game" id="screen-game" data-i18n-label="label.game" aria-label="Breach in progress">
+        <div class="frame game-frame" id="game-frame">
+          <header class="topbar">
+            <p class="topbar-title"><span class="prompt">&gt;_</span> BREACH 60 <span class="sep">//</span> <span data-i18n="ui.level">LEVEL</span> <span id="level">01</span></p>
+            <p class="clock">
+              <span class="clock-label" data-i18n="ui.timeLeft">TIME LEFT</span>
+              <span class="clock-value" id="clock" role="timer">01:00</span>
+              <span class="penalty-pop" id="penalty-pop" aria-hidden="true">-5s</span>
+            </p>
+          </header>
+
+          <section class="access" data-i18n-label="label.progress" aria-label="System access progress">
+            <div class="access-head">
+              <span data-i18n="ui.access">SYSTEM ACCESS</span>
+              <span class="run-tools">
+                <span class="shield-status" id="shield-status" data-i18n="ui.shieldOn" hidden>SHIELD ON</span>
+                <button class="hint-button" id="btn-hint" type="button" data-i18n="ui.useHint" hidden>USE HINT</button>
+                <button class="quit-button" id="btn-quit" type="button">MAIN MENU</button>
+              </span>
+              <span id="access-count">0 / 4</span>
+            </div>
+            <ol class="layers" id="layers"></ol>
+          </section>
+
+          <section class="puzzle-card" id="puzzle-card" aria-live="polite">
+            <div class="puzzle-mount" id="puzzle-mount"></div>
+            <div class="breached-banner" aria-hidden="true" data-i18n="ui.layerBreached">LAYER BREACHED</div>
+          </section>
+
+          <section class="terminal" data-i18n-label="label.log" aria-label="System log">
+            <div class="terminal-body" id="game-terminal" role="log"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- SUCCESS -->
+      <section class="screen screen-result screen-success" id="screen-success" data-i18n-label="label.success" aria-label="Mission complete">
+        <div class="frame result-frame">
+          <header class="topbar">
+            <p class="topbar-title"><span class="prompt">&gt;_</span> BREACH 60 <span class="sep">//</span> <span data-i18n="ui.complete">MISSION COMPLETE</span></p>
+          </header>
+          <h2 class="result-title brackets"><span data-i18n="ui.granted">ACCESS GRANTED</span></h2>
+          <dl class="stats">
+            <div><dt data-i18n="ui.timeLeft">TIME LEFT</dt><dd id="success-time">00:00</dd></div>
+            <div><dt data-i18n="ui.finalScore">FINAL SCORE</dt><dd id="success-score">0</dd></div>
+            <div><dt data-i18n="ui.best">BEST SCORE</dt><dd><span id="success-best">0</span> <mark id="success-new" data-i18n="ui.new" hidden>NEW</mark></dd></div>
+            <div><dt data-i18n="ui.layersCleared">SECURITY LAYERS CLEARED</dt><dd id="success-layers">4 / 4</dd></div>
+            <div><dt data-i18n="ui.pointsEarned">HACKING POINTS EARNED</dt><dd class="points-earned" id="success-points">+0</dd></div>
+            <div><dt data-i18n="ui.pointsTotal">POINTS BALANCE</dt><dd id="success-total">0</dd></div>
+          </dl>
+          <div class="result-actions">
+            <button class="btn btn-primary btn-next" id="btn-next" data-action="next" type="button"><span class="chev">&gt;</span> <span data-i18n="ui.next">NEXT LEVEL</span> <span class="chev">&lt;</span></button>
+            <button class="btn btn-ghost" data-action="retry" type="button" data-i18n="ui.retry">RETRY</button>
+            <button class="btn btn-ghost" data-action="map" type="button" data-i18n="ui.map">NETWORK MAP</button>
+          </div>
+          <section class="terminal" data-i18n-label="label.log" aria-label="System log">
+            <div class="terminal-body" id="success-terminal" role="log"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- FAIL -->
+      <section class="screen screen-result screen-fail" id="screen-fail" data-i18n-label="label.fail" aria-label="Mission failed">
+        <div class="frame result-frame">
+          <header class="topbar">
+            <p class="topbar-title"><span class="prompt">&gt;_</span> BREACH 60 <span class="sep">//</span> <span data-i18n="ui.failed">MISSION FAILED</span></p>
+          </header>
+          <h2 class="result-title brackets"><span data-i18n="ui.denied">ACCESS DENIED</span></h2>
+          <dl class="stats">
+            <div><dt data-i18n="ui.cause">FAILURE CAUSE</dt><dd id="fail-cause">-</dd></div>
+            <div><dt data-i18n="ui.layerReached">LAYER REACHED</dt><dd id="fail-layer">01</dd></div>
+            <div><dt data-i18n="ui.layersCleared">SECURITY LAYERS CLEARED</dt><dd id="fail-layers">0 / 4</dd></div>
+            <div><dt data-i18n="ui.finalScore">FINAL SCORE</dt><dd id="fail-score">0</dd></div>
+            <div><dt data-i18n="ui.best">BEST SCORE</dt><dd><span id="fail-best">0</span> <mark id="fail-new" data-i18n="ui.new" hidden>NEW</mark></dd></div>
+          </dl>
+          <div class="result-actions">
+            <button class="btn btn-primary" data-action="retry" type="button"><span class="chev">&gt;</span> <span data-i18n="ui.retry">RETRY</span> <span class="chev">&lt;</span></button>
+            <button class="btn btn-ghost" data-action="map" type="button" data-i18n="ui.map">NETWORK MAP</button>
+          </div>
+          <section class="terminal" data-i18n-label="label.log" aria-label="System log">
+            <div class="terminal-body" id="fail-terminal" role="log"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="howto" id="howto" aria-labelledby="howto-title">
+      <h2 id="howto-title" data-i18n="ui.howto">HOW TO PLAY</h2>
+      <ol>
+        <li data-i18n-html="howto.1">You have <strong>60 seconds</strong> to break through <strong>four security layers</strong>, in order.</li>
+        <li data-i18n-html="howto.2">Each layer is a different puzzle: decrypt a code, route a network, decode a pattern.</li>
+        <li data-i18n-html="howto.3">Follow the rule on screen. Use the keyboard, or tap and drag on a touch screen.</li>
+        <li data-i18n-html="howto.4">A wrong answer costs <strong class="warn">5 seconds or more</strong>. The clock never stops.</li>
+        <li data-i18n-html="howto.5">Clear all four layers for <strong>ACCESS GRANTED</strong> and unlock the next level. Higher levels are harder.</li>
+        <li data-i18n-html="howto.6">Clearing a node earns <strong>hacking points</strong>. Spend them before a run on extra time, a shield or a hint.</li>
+      </ol>
+      <form method="dialog">
+        <button class="btn btn-primary" type="submit" data-i18n="ui.understood">UNDERSTOOD</button>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
