@@ -1759,7 +1759,8 @@ button {
 /* Network routing */
 
 .network,
-.pattern {
+.pattern,
+.audit {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2006,6 +2007,109 @@ button {
 
 .pattern-option.is-wrong .pattern-grid {
   border-color: var(--red);
+}
+
+/* Log analysis */
+
+.audit-rules {
+  width: min(100%, 460px);
+  padding: 6px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background: var(--terminal);
+  font-size: 12px;
+}
+
+.audit-rules-title {
+  margin: 0 0 2px;
+  color: var(--green-text);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.audit-rules ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.audit-allowed {
+  margin-left: 8px;
+  color: var(--green-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.audit-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: min(100%, 460px);
+}
+
+.audit-head,
+.audit-line {
+  display: grid;
+  grid-template-columns: 22px 1.5fr 1fr 1fr 0.8fr 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px 0 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-align: left;
+}
+
+.audit-head {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.audit-line {
+  min-height: 34px;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background: var(--terminal);
+  color: var(--text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s, border-color 0.12s, box-shadow 0.12s;
+}
+
+.audit-line:hover:not(:disabled) {
+  border-color: var(--neon);
+  box-shadow: var(--glow);
+}
+
+.audit-line:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.audit-line:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.audit-line.is-wrong {
+  border-color: var(--red);
+}
+
+.audit-line .audit-key {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--card-active);
+  color: var(--green-text);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.audit-cell {
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* Terminal */
@@ -2454,7 +2558,8 @@ button {
   }
 
   .network .puzzle-kicker,
-  .pattern .puzzle-kicker {
+  .pattern .puzzle-kicker,
+  .audit .puzzle-kicker {
     display: none;
   }
 
